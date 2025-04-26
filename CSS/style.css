@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Special+Gothic+Condensed+One&family=Special+Gothic+Expanded+One&display=swap');
+
+body {
+    font-family: "Special Gothic Condensed One", sans-serif;
+    background: #A1FFCE;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #FAFFD1, #A1FFCE);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #FAFFD1, #A1FFCE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.navbar {
+    background-color: #a7e1f7;
+    border-radius: 0 0 5px 5px; /* Solo abajo */
+    box-shadow: #333 0 0 10px;
+  }
+
+  .navbar-brand {
+    margin-left: -40px;
+  }
+  
+  .navbar-nav {
+    margin-right: -50px;
+  }
+
+  .collapse ul li a{
+    margin-left: 15px;
+    font-style: normal;
+    color: #0d6efd;
+    font-size: 18px;
+  }
+
+  .nav-link.active {
+    color: rgb(0, 0, 0) !important; /* el !important ayuda a sobreescribir estilos de Bootstrap */
+  }
+  
+  
+
+/* Carousel */
+.carousel-item {
+    max-height: 420px;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    height: 420px;
+}
+
+h2{
+    margin-top: -20px;
+}
+.titulo {
+    color: #0d6efd; /* Un azul elegante */
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    
+  }
+  
+  .titulo::after {
+    content: "";
+    display: block;
+    width: 22vw;
+    height: 3px;
+    background-color: #0d6efd; /* dorado suave */
+    margin: 5px auto 0;
+    border-radius: 2px;
+  }
+  
+
+/* Cards */
+.card {
+    padding: 10px;
+    transition: transform 0.3s;
+    max-height: 80vh;
+    border-radius: 20px;
+    background-color: #a7e0f759;
+}
+
+.card h5 {
+  color: #0d6efd !important;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.card-img-top {
+    border-radius: 20px;
+}
+
+.col-md-8 p{
+  color: #808080;
+}
+
+/* Footer */
+footer a {
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #0d6efd !important;
+}
+
+.col-md-4 h5{
+  color: #a7e1f7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .carousel-caption {
+        display: none !important;
+    }
+}
