@@ -3,8 +3,8 @@
 body {
     font-family: "Special Gothic Condensed One", sans-serif;
     background: #A1FFCE;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to left, #FAFFD1, #A1FFCE);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to left, #FAFFD1, #A1FFCE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: -webkit-linear-gradient(to left, #FAFFD1, #A1FFCE);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #FAFFD1, #A1FFCE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
 
@@ -110,7 +110,44 @@ footer a:hover {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+
+  .navbar-brand {
+    margin-left: 20px;
+  }
+
+  .collapse ul li a{
+    text-align: center;
+    margin-left: -25px;
+    background-color: #e9e9e9;
+    box-shadow: #333 0 0 2px;
+  }
+
+  .carousel-item {
+    max-height: 300px;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    height: 300px;
+}
+
     .carousel-caption {
         display: none !important;
+    }
+
+    .card {
+      max-height: 45vh;
+    }
+
+    section input {
+      text-align: left;
+    }
+
+    section button {
+      width: 30vw;
+    }
+    
+    footer {
+      text-align: center;
     }
 }
