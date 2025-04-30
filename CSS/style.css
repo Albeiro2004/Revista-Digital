@@ -32,8 +32,6 @@ body {
   .nav-link.active {
     color: rgb(0, 0, 0) !important; /* el !important ayuda a sobreescribir estilos de Bootstrap */
   }
-  
-  
 
 /* Carousel */
 .carousel-item {
@@ -118,7 +116,7 @@ footer a:hover {
   .collapse ul li a{
     text-align: center;
     margin-left: -25px;
-    background-color: #e9e9e9;
+    background-color: #e9e9e962;
     box-shadow: #333 0 0 2px;
   }
 
@@ -137,6 +135,13 @@ footer a:hover {
 
     .card {
       max-height: 45vh;
+    }
+
+    .titulo{
+      font-size: 25px;
+    }
+    .titulo::after {
+      width: 45vw;
     }
 
     section input {
