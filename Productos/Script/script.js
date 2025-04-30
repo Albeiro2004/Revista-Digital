@@ -73,3 +73,71 @@
             }
         });
     
+//funciones del carrito de compras
+let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+function guardarCarrito() {
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+}
+  const carritoLista = document.getElementById('carrito-lista');
+  const carritoTotal = document.getElementById('carrito-total');
+  const carritoContador = document.getElementById('carrito-contador');
+
+  document.querySelectorAll('.agregar-carrito-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const nombre = btn.dataset.name;
+      const precio = parseFloat(btn.dataset.price.replace('$', '').replace(',', ''));
+      const img = btn.dataset.img;
+
+      carrito.push({ nombre, precio, img });
+      actualizarCarrito();
+    });
+  });
+
+  function actualizarCarrito() {
+    carritoLista.innerHTML = '';
+    let total = 0;
+  
+    carrito.forEach((item, index) => {
+      total += item.precio;
+      const li = document.createElement('li');
+      li.className = 'list-group-item d-flex justify-content-between align-items-center';
+      li.innerHTML = `
+        <div class="d-flex align-items-center">
+          <img src="${item.img}" width="50" class="me-3">
+          <div>
+            <h6 class="mb-0">${item.nombre}</h6>
+            <small class="text-muted">$${item.precio.toFixed(2)}</small>
+          </div>
+        </div>
+        <button class="btn btn-sm btn-danger" onclick="eliminarDelCarrito(${index})">&times;</button>
+      `;
+      carritoLista.appendChild(li);
+    });
+  
+    carritoTotal.textContent = total.toFixed(2);
+    carritoContador.textContent = carrito.length;
+    guardarCarrito();
+  }
+  
+  function eliminarDelCarrito(index) {
+    carrito.splice(index, 1);
+    actualizarCarrito();
+  }
+  
+  //Simular compra
+  document.querySelector('#carritoModal .btn-success').addEventListener('click', () => {
+    if (carrito.length === 0) {
+      alert('Tu carrito está vacío.');
+      return;
+    }
+  
+    if (confirm('¿Deseas finalizar la compra?')) {
+      alert('¡Gracias por tu compra! Tu pedido ha sido procesado.');
+      carrito = [];
+      guardarCarrito();
+      actualizarCarrito();
+      const modal = bootstrap.Modal.getInstance(document.getElementById('carritoModal'));
+      modal.hide();
+    }
+  });
+  
