@@ -1,5 +1,50 @@
 
         document.addEventListener('DOMContentLoaded', function() {
+
+            //listar los Productos
+            const container = document.getElementById('productosContainer');
+        
+            fetch('../api_productos.php')
+                .then(response => response.json())
+                .then(productos => {
+                    container.innerHTML = ''; // Limpia el contenedor
+        
+                    productos.forEach(producto => {
+                        const col = document.createElement('div');
+                        col.className = 'col';
+        
+                        col.innerHTML = `
+                            <div class="card product-card h-100">
+                                <img src="${producto.imagen}" class="card-img-top product-img" alt="${producto.nombre}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${producto.nombre}</h5>
+                                    <p class="card-text text-success fw-bold">$${parseFloat(producto.precio).toFixed(2)}</p>
+                                </div>
+                                <div class="card-footer bg-transparent">
+                                    <button class="btn btn-primary w-100 detalles-btn"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#productoModal"
+                                        data-name="${producto.nombre}"
+                                        data-price="$${parseFloat(producto.precio).toFixed(2)}"
+                                        data-img="${producto.imagen}">
+                                        Ampliar <i class="fas fa-arrow-right ms-2"></i>
+                                    </button>
+        
+                                    <button class="btn btn-success w-100 mt-2 agregar-carrito-btn"
+                                        data-name="${producto.nombre}"
+                                        data-price="${producto.precio}"
+                                        data-img="${producto.imagen}">
+                                        Agregar al carrito <i class="fas fa-cart-plus ms-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+        
+                        container.appendChild(col);
+                    });
+                })
+                .catch(error => console.error('Error al cargar productos:', error));
+        
             // Configurar modal con datos del producto
             const productoModal = document.getElementById('productoModal');
             if (productoModal) {
@@ -21,56 +66,56 @@
                     modalImg.alt = name;
                 });
             }
-            
-            // Funcionalidad Ver Más/Ver Menos
+                
+            //Funcionalidad de buscar y mostrar con límites (Juntas)
             const verMasBtn = document.getElementById('verMasBtn');
             const verMenosBtn = document.getElementById('verMenosBtn');
             const productosContainer = document.getElementById('productosContainer');
-            
-            if (verMasBtn && verMenosBtn && productosContainer) {
-                // Ocultar botón Ver Menos inicialmente
-                verMenosBtn.style.display = 'none';
-                
-                // Clonar productos para simular más elementos
-                const originalProducts = productosContainer.innerHTML;
-                
-                verMasBtn.addEventListener('click', function() {
-                    // Agregar más productos (en un caso real sería una petición AJAX)
-                    productosContainer.innerHTML += originalProducts;
-                    verMasBtn.style.display = 'none';
-                    verMenosBtn.style.display = 'inline-block';
-                });
-                
-                verMenosBtn.addEventListener('click', function() {
-                    // Mostrar solo los primeros productos
-                    const firstProducts = productosContainer.querySelectorAll('.col');
-                    firstProducts.forEach((product, index) => {
-                        if (index >= 8) {
-                            product.remove();
-                        }
-                    });
-                    verMenosBtn.style.display = 'none';
-                    verMasBtn.style.display = 'inline-block';
-                });
-            }
-            
-            // Funcionalidad de búsqueda
             const searchBar = document.getElementById('searchBar');
-            if (searchBar) {
-                searchBar.addEventListener('keyup', function() {
-                    const searchTerm = this.value.toLowerCase();
-                    const products = document.querySelectorAll('.product-card');
-                    
-                    products.forEach(product => {
-                        const name = product.querySelector('.card-title').textContent.toLowerCase();
-                        if (name.includes(searchTerm)) {
-                            product.closest('.col').style.display = 'block';
-                        } else {
-                            product.closest('.col').style.display = 'none';
-                        }
-                    });
-                });
+
+            if(productosContainer && verMasBtn && verMenosBtn){
+              const allProducts = Array.from(productosContainer.querySelectorAll('.col'));
+              const batchSize = 8;
+              let visibleCount = batchSize;
+              let filteredProducts = [...allProducts];
+            
+            
+            function actualizarVista(){
+              allProducts.forEach(p => p.style.display = 'none');
+              filteredProducts.forEach((product, index) => {
+                product.style.display = index < visibleCount ? 'block' : 'none';
+              });
+              verMasBtn.style.display = (visibleCount < filteredProducts.length) ? 'inline-block' : 'none';
+              verMenosBtn.style.display = (visibleCount > batchSize) ? 'inline-block' : 'none';
             }
+
+            if(searchBar){
+              searchBar.addEventListener('keyup', function(){
+                const term = this.ariaValueMax.toLowerCase();
+                filteredProducts = allProducts.filter(product => {
+                  const title = product.querySelector('.card-title').textContent.toLowerCase();
+                  return title.includes(term);
+                });
+                visibleCount = batchSize;
+                actualizarVista();
+              });
+            }
+
+            verMasBtn.addEventListener('click', () => {
+              visibleCount = Math.min(visibleCount + batchSize, filteredProducts.length);
+              actualizarVista();
+          });
+  
+          verMenosBtn.addEventListener('click', () => {
+              visibleCount = Math.max(visibleCount - batchSize, batchSize);
+              actualizarVista();
+          });
+  
+          // Mostrar inicial
+          actualizarVista();
+
+          }
+
         });
     
 //funciones del carrito de compras

@@ -37,8 +37,8 @@
                         <a class="nav-link active" href="articulos.html">Catálogo</a>
                     </li>
                     <button class="btn btn-outline-dark position-relative ms-3" data-bs-toggle="modal" data-bs-target="#carritoModal">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="carrito-contador">0</span>
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="carrito-contador">0</span>
                     </button>
                 </ul>
             </div>
@@ -62,7 +62,12 @@
 
     <!-- Productos -->
     <section class="container my-5">
+        
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4" id="productosContainer">
+            <!-- Aquí se cargarán los productos con JS -->
+        </div>
+
+        <!--<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4" id="productosContainer">
             <?php
             include 'conexion/conexion.php'; // tu archivo de conexión a MySQL
 
@@ -83,26 +88,30 @@
                             </p>
                         </div>
                         <div class="card-footer bg-transparent">
-                            <button class="btn btn-primary w-100 detalles-btn" data-bs-toggle="modal" data-bs-target="#productoModal"
-                                data-name="<?= $producto['nombre'] ?>" data-price="$<?= number_format($producto['precio'], 2) ?>"
+                            <button class="btn btn-primary w-100 detalles-btn"
+                                data-bs-toggle="modal"
+                                data-bs-target="#productoModal"
+                                data-name="<?= $producto['nombre'] ?>"
+                                data-price="$<?= number_format($producto['precio'], 2) ?>"
                                 data-img="<?= $producto['imagen'] ?>">
                                 Ampliar <i class="fas fa-arrow-right ms-2"></i>
-                                <button class="btn btn-success w-100 mt-2 agregar-carrito-btn"
-                                    data-name="<?= $producto['nombre'] ?>"
-                                    data-price="$<?= $producto['precio'] ?>"
-                                    data-img="$<?= number_format($producto['precio'], 2) ?>">
-                                    Agregar al carrito <i class="fas fa-cart-plus ms-2"></i>
-                                </button>
+                            </button>
 
+                            <button class="btn btn-success w-100 mt-2 agregar-carrito-btn"
+                                data-name="<?= $producto['nombre'] ?>"
+                                data-price="$<?= $producto['precio'] ?>"
+                                data-img="<?= $producto['imagen'] ?>">
+                                Agregar al carrito <i class="fas fa-cart-plus ms-2"></i>
                             </button>
                         </div>
+
                     </div>
                 </div>
             <?php
             }
             ?>
 
-        </div>
+        </div>-->
 
         <!-- Botones Ver Más/Ver Menos -->
         <div class="text-center mt-4">
