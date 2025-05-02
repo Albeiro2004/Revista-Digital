@@ -34,7 +34,7 @@
                         <a class="nav-link" href="../nosotros/nosotros.html">Sobre Nosotros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="articulos.html">Catálogo</a>
+                        <a class="nav-link active" href="articulos.php">Catálogo</a>
                     </li>
                     <button class="btn btn-outline-dark position-relative ms-3" data-bs-toggle="modal" data-bs-target="#carritoModal">
                         <i class="fas fa-shopping-cart"></i>
@@ -62,12 +62,7 @@
 
     <!-- Productos -->
     <section class="container my-5">
-        
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4" id="productosContainer">
-            <!-- Aquí se cargarán los productos con JS -->
-        </div>
-
-        <!--<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4" id="productosContainer">
             <?php
             include 'conexion/conexion.php'; // tu archivo de conexión a MySQL
 
@@ -111,7 +106,7 @@
             }
             ?>
 
-        </div>-->
+        </div>
 
         <!-- Botones Ver Más/Ver Menos -->
         <div class="text-center mt-4">
